@@ -11,8 +11,9 @@ body  {
 
 
 .content {
+    display: flex;
+    flex-direction: row;
     height: 100%;
-
 }
 
 .header {
@@ -30,9 +31,9 @@ body  {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     height: 100%;
-    width: 25%;
+    max-width: 20%;
     padding: 25px;
     background-color: rgb(189, 189, 189);
 }
@@ -40,19 +41,27 @@ body  {
 .deaultProjects {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    height: 100%;
+}
 
-
+.userProjects {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: left;
+    width: 20vw;
+    padding: 10px;
+    font-weight: bold;
 }
 
 .item {
     padding: 10px;
-    width: 25vw;
+    width: 20vw;
     border: none;
-    font-size: 2.5vw;
     background-color: rgb(189, 189, 189);
+    text-align: left;
 }
 
 .item:hover {
@@ -63,4 +72,11 @@ body  {
 .item:focus {
     font-weight: bold;    
     background-color: rgb(206, 202, 202);
+}
+
+/*----------------------------------------------------------------MAIN---------------------------------------------------------------------------------------------*/
+
+.main {
+    padding: 3%;
+    width: 50%;
 }

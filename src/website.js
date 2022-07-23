@@ -1,4 +1,4 @@
-import {makeHeader, loadMenu, loadMain} from "./UI";
+import {makeHeader,makeFooter, loadMenu, loadMain} from "./UI";
 import { loadToday } from "./today";
 import { loadWeek } from "./week";
 import { loadMonth } from "./month";
@@ -30,6 +30,7 @@ const buttonListeners = () => {
 const runTodo = () => {
 
     makeHeader();
+    makeFooter();
     loadMenu();
     loadMain();
     buttonListeners();

@@ -10,6 +10,7 @@ const makeMenu = () => {
     const menu  = document.createElement('div');
     const defaultProjects = document.createElement('div');
     const userProjects = document.createElement('div');
+    const userProjectsTitle = document.createElement('div');
     const item1 = document.createElement('button');
     const item2 = document.createElement('button');
     const item3 = document.createElement('button');
@@ -24,7 +25,8 @@ const makeMenu = () => {
 
     menu.classList.add('menu');
     defaultProjects.classList.add("deaultProjects");
-    userProjects.classList.add("userProjects")
+    userProjectsTitle.classList.add('userProjectsTitle');
+    userProjects.classList.add("userProjects");
     item1.classList.add('item');
     item2.classList.add('item');
     item3.classList.add('item');
@@ -34,7 +36,7 @@ const makeMenu = () => {
     item2.innerHTML = 'This Week';
     item3.innerHTML = 'This Month';
     item4.innerHTML = 'Notes'
-    userProjects.innerHTML = "Routines";
+    userProjectsTitle.innerHTML = "Routines";
 
     defaultProjects.appendChild(item1);
     defaultProjects.appendChild(item2);
@@ -42,20 +44,63 @@ const makeMenu = () => {
     defaultProjects.appendChild(item4);
 
     menu.appendChild(defaultProjects);
+    menu.appendChild(userProjectsTitle);
     menu.appendChild(userProjects);
 
     return menu
 };
 
 
-
 const makeMain = () => {
-    const main = document.createElement('div')
-    main.classList.add('main')
-
+    const main = document.createElement('div');
+    main.classList.add('main');
     return main;
 };
 
+const makeFooter = () => {
+    const footer  = document.querySelector('.footer');
+    footer.innerHTML = 'Copyright Patryk Borowski 2022'
+};
+
+const makePopup = () => {
+    const popUp = document.createElement('div');
+    const titleText = document.createElement('span');
+    const titleContent = document.createElement('div');
+    const descritpionText = document.createElement('span');
+    const descritpionContent = document.createElement('div');
+    const dateText = document.createElement('span');
+    const dateContent = document.createElement('div');
+    const doneBtn = document.createElement('button');
+    const closeBtn = document.createElement('button');
+
+
+    titleText.innerHTML = 'Title';
+    descritpionText.innerHTML = 'Description';
+    dateText.innerHTML = 'Due Date';
+    doneBtn.innerHTML = 'Add Task';
+    closeBtn.innerHTML = 'Close';
+
+    popUp.appendChild(titleText);
+    popUp.appendChild(titleContent);
+    popUp.appendChild(descritpionText);
+    popUp.appendChild(descritpionContent);
+    popUp.appendChild(dateText);
+    popUp.appendChild(dateContent);
+    popUp.appendChild(closeBtn);
+    popUp.appendChild(doneBtn);
+
+
+    return popUp;
+};
+
+const openPopup = () => {
+    const popUp = document.querySelector('');
+
+};
+
+const closePopup = () => {
+
+};
 
 const loadMain = () => {
     const content = document.querySelector(".content");
@@ -70,4 +115,5 @@ const loadMenu = () => {
 };
 
 
-export {makeHeader, loadMenu, loadMain};
+
+export {makeHeader,makeFooter, loadMenu, loadMain};

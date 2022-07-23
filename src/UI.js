@@ -1,3 +1,7 @@
+import { appendTask } from "./tasks";
+
+
+
 const makeHeader = () => {
     const header = document.querySelector('.header');
     header.setAttribute('id','header')
@@ -59,20 +63,24 @@ const makeMain = () => {
 
 const makeFooter = () => {
     const footer  = document.querySelector('.footer');
-    footer.innerHTML = 'Copyright Patryk Borowski 2022'
+    footer.innerHTML = 'Copyright © Patryk Borowski 2022'
 };
 
 const makePopup = () => {
     const popUp = document.createElement('div');
     const titleText = document.createElement('span');
-    const titleContent = document.createElement('div');
+    const titleContent = document.createElement('input');
     const descritpionText = document.createElement('span');
-    const descritpionContent = document.createElement('div');
+    const descritpionContent = document.createElement('input');
     const dateText = document.createElement('span');
-    const dateContent = document.createElement('div');
+    const dateContent = document.createElement('input');
     const doneBtn = document.createElement('button');
     const closeBtn = document.createElement('button');
 
+    popUp.classList.add('popup');
+    titleContent.classList.add('titleContent');
+    descritpionContent.classList.add("descriptionContent");
+    dateContent.classList.add('dateContent');
 
     titleText.innerHTML = 'Title';
     descritpionText.innerHTML = 'Description';
@@ -86,20 +94,67 @@ const makePopup = () => {
     popUp.appendChild(descritpionContent);
     popUp.appendChild(dateText);
     popUp.appendChild(dateContent);
-    popUp.appendChild(closeBtn);
     popUp.appendChild(doneBtn);
+    popUp.appendChild(closeBtn);
 
+    doneBtn.addEventListener('click', () => {
+        appendTask();
+    })
+
+    closeBtn.addEventListener('click', () => {
+        closePopup();
+    })
 
     return popUp;
 };
 
+const makeaddBtn = () => {
+    const addBtn = document.createElement('button');
+    addBtn.innerHTML  = 'Add A Task';
+
+    addBtn.addEventListener('click', ()=>{
+        openPopup();
+    })
+
+    return addBtn;
+};
+
+const makeTask = () => {
+    const task = document.createElement('div');
+    const title = document.createElement('span');
+    const descritpion =  document.createElement('span');
+    const date = document.createElement('span');
+
+    title.setAttribute('id', 'taskTitle');
+    descritpion.setAttribute('id', 'taskDesc');
+    date.setAttribute('id', 'taskDate');
+
+    task.appendChild(title);
+    task.appendChild(descritpion);
+    task.appendChild(date);
+
+
+    return task;
+};
+
+const loadPopup = () => {
+    const content = document.querySelector('.content')
+
+    content.appendChild(makePopup());
+};
+
 const openPopup = () => {
-    const popUp = document.querySelector('');
+    const popup = document.querySelector(".popup");
+    
+    popup.classList.add('open-popup');
 
 };
 
 const closePopup = () => {
+    const popup = document.querySelector(".popup");
 
+
+    popup.classList.remove("open-popup");
 };
 
 const loadMain = () => {
@@ -116,4 +171,4 @@ const loadMenu = () => {
 
 
 
-export {makeHeader,makeFooter, loadMenu, loadMain};
+export {makeHeader,makeFooter, loadMenu, loadMain, loadPopup, openPopup, makeaddBtn};

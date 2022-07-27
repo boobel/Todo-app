@@ -1,17 +1,15 @@
-import { openPopup, makeaddBtn } from "./UI";
+import { makeaddBtn } from "./UI";
+import { makeTitle } from "./today";
+import { appendTask, updateTasks } from "./tasks";
+
 
 const makeMonth = () => {
     const month = document.createElement('div')
-    const line = document.createElement("hr");
 
+    month.classList.add('tasksMonth')
     month.setAttribute('id', 'tasksMain')
-    line.setAttribute("width", "100%");
 
     month.innerHTML = 'This month'
-
-    month.append(line);
-
-    month.appendChild(makeaddBtn());
 
 
     return month
@@ -23,7 +21,10 @@ const loadMonth = () => {
     const main =document.querySelector('.main')
     main.innerHTML='';
 
+    main.appendChild(makeTitle('this month'));
     main.appendChild(makeMonth());
+    main.appendChild(makeaddBtn());
+    updateTasks('tasksMonth')
 };
 
 export {loadMonth};

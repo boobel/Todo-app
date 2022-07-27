@@ -1,8 +1,10 @@
-import { currentList } from "./website";
+import { downloadfromStorage, savetoStorage } from "./storage";
 
-const todayTasks = [];
-const weekTasks = [];
-const monthTasks = [];
+import { makeTask } from "./UI";
+
+let todayTasks = [];
+let weekTasks = [];
+let monthTasks = [];
 
 class Task {
     constructor(title, descritpion, date) {
@@ -36,47 +38,70 @@ class Task {
     };
 };
 
-const adddefaultTask = (arr) => {
+const adddefaultTask = () => {
     const titleC = document.querySelector('.titleContent');
-    const descC = document.querySelector('.descriptionContent');
     const dateC = document.querySelector('.dateContent');
 
     const task = new Task;
 
     
     task.setTitle = titleC.value;
-    task.setDescription = descC.value;
     task.setDate = dateC.value;
 
     return task;
 };
 
-const appendTask = () => {
-    if(currentList === 'Today') {
-        todayTasks.push(adddefaultTask())
+const appendTask = (list) => {
+    if(list==='tasksToday'){
+        todayTasks.push(adddefaultTask());
+        savetoStorage('todayTasks',todayTasks);
     }
-    else if(currentList === 'Week') {
+    else if(list==='tasksWeek') {
         weekTasks.push(adddefaultTask())
-
+        savetoStorage('weekTasks',weekTasks);
+        console.log('hola')
     }
-    else if(currentList === 'Month') {
+    else if(list==='tasksMonth') {
         monthTasks.push(adddefaultTask())
+        savetoStorage('monthTasks',monthTasks);
+    }
+
+}
+
+const updateTasks = (when) => {
+    let place = document.querySelector('.' + when);
+    place.innerHTML = '';
+    let arr;
+
+    if (when === "tasksToday") {
+        arr = todayTasks;
+    }
+    else if (when === 'tasksWeek') {
+        arr = weekTasks;
+    }
+    else if (when === 'tasksMonth') {
+        arr = monthTasks;
+    }
+ 
+    if (localStorage.getItem('todayTasks')) {
+        todayTasks = downloadfromStorage('todayTasks');
+    }
+
+    if (localStorage.getItem('weekTasks')){
+        weekTasks = downloadfromStorage('weekTasks')
+    }
+
+    if (localStorage.getItem('monthTasks')){
+        monthTasks = downloadfromStorage('monthTasks')
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+        let title = arr[i].title
+        let date = arr[i].date
+        const div = makeTask(title, date);
+        place.appendChild(div);
     }
 }
 
-const displayTasks = (task) => {
-    if(currentList === 'Today') {
-        
-    }
-    else if(currentList === 'Week') {
-        
 
-    }
-    else if(currentList === 'Month') {
-        
-    }
-}
-
-
-
-export { appendTask };
+export {appendTask, updateTasks,todayTasks};

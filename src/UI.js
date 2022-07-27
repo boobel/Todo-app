@@ -1,4 +1,6 @@
 import { appendTask } from "./tasks";
+import { updateTasks} from "./tasks";
+import { current } from "./website";
 
 
 
@@ -13,43 +15,32 @@ const makeHeader = () => {
 const makeMenu = () => {
     const menu  = document.createElement('div');
     const defaultProjects = document.createElement('div');
-    const userProjects = document.createElement('div');
-    const userProjectsTitle = document.createElement('div');
     const item1 = document.createElement('button');
     const item2 = document.createElement('button');
     const item3 = document.createElement('button');
-    const item4 = document.createElement('button');
 
     menu.setAttribute('id','menu');
     item1.setAttribute('id','todayBtn');
     item2.setAttribute('id','weekBtn');
     item3.setAttribute('id','monthBtn');
-    item4.setAttribute('id','notesBtn');
 
 
     menu.classList.add('menu');
     defaultProjects.classList.add("deaultProjects");
-    userProjectsTitle.classList.add('userProjectsTitle');
-    userProjects.classList.add("userProjects");
     item1.classList.add('item');
     item2.classList.add('item');
     item3.classList.add('item');
-    item4.classList.add('item');
 
     item1.innerHTML = 'Today';
     item2.innerHTML = 'This Week';
     item3.innerHTML = 'This Month';
-    item4.innerHTML = 'Notes'
-    userProjectsTitle.innerHTML = "Routines";
 
     defaultProjects.appendChild(item1);
     defaultProjects.appendChild(item2);
     defaultProjects.appendChild(item3);
-    defaultProjects.appendChild(item4);
+
 
     menu.appendChild(defaultProjects);
-    menu.appendChild(userProjectsTitle);
-    menu.appendChild(userProjects);
 
     return menu
 };
@@ -98,10 +89,31 @@ const makePopup = () => {
     popUp.appendChild(closeBtn);
 
     doneBtn.addEventListener('click', () => {
-        appendTask();
+        if(current==='today'){
+            appendTask('tasksToday');
+            updateTasks("tasksToday");
+        }
+        else if(current ==='week'){
+            appendTask('tasksWeek');
+            updateTasks("tasksWeek");
+        }
+        else if(current === 'month'){
+            appendTask('tasksMonth');
+            updateTasks("tasksMonth");
+        }
+        closePopup();
     })
 
     closeBtn.addEventListener('click', () => {
+        if(current==='today'){
+            updateTasks("tasksToday");
+        }
+        else if(current ==='week'){
+            updateTasks("tasksWeek");
+        }
+        else if(current === 'month'){
+            updateTasks("tasksMonth");
+        }        
         closePopup();
     })
 
@@ -112,6 +124,8 @@ const makeaddBtn = () => {
     const addBtn = document.createElement('button');
     addBtn.innerHTML  = 'Add A Task';
 
+    addBtn.setAttribute('id','addBtn')
+
     addBtn.addEventListener('click', ()=>{
         openPopup();
     })
@@ -119,20 +133,20 @@ const makeaddBtn = () => {
     return addBtn;
 };
 
-const makeTask = () => {
+const makeTask = (_title,_date) => {
     const task = document.createElement('div');
     const title = document.createElement('span');
-    const descritpion =  document.createElement('span');
     const date = document.createElement('span');
 
+    task.setAttribute('id', 'taskMain');
     title.setAttribute('id', 'taskTitle');
-    descritpion.setAttribute('id', 'taskDesc');
     date.setAttribute('id', 'taskDate');
 
-    task.appendChild(title);
-    task.appendChild(descritpion);
-    task.appendChild(date);
+    title.innerHTML =  _title;
+    date.innerHTML = "Due Date: " + _date;
 
+    task.appendChild(title);
+    task.appendChild(date);
 
     return task;
 };
@@ -171,4 +185,4 @@ const loadMenu = () => {
 
 
 
-export {makeHeader,makeFooter, loadMenu, loadMain, loadPopup, openPopup, makeaddBtn};
+export {makeHeader,makeFooter, makeTask, loadMenu, loadMain, loadPopup, openPopup, makeaddBtn};

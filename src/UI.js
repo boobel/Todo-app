@@ -1,3 +1,4 @@
+import { appendRoutine, updateRoutines } from "./routines";
 import { appendTask, updateTasks } from "./tasks";
 
 
@@ -14,6 +15,7 @@ const makeMenu = () => {
     const menu  = document.createElement('div');
     const defaultProjects = document.createElement('div');
     const userProjects = document.createElement('div');
+    const userProjectList = document.createElement('div');
     const item1 = document.createElement('button');
     const item2 = document.createElement('button');
     const item3 = document.createElement('button');
@@ -27,9 +29,12 @@ const makeMenu = () => {
     item3.setAttribute('id','monthBtn');
     item4.setAttribute('id','inboxBtn');
     item5.setAttribute('id', 'routines');
+    userProjects.setAttribute('id','userProjects')
+    
 
     menu.classList.add('menu');
     defaultProjects.classList.add("deaultProjects");
+    userProjectList.classList.add("userProjectsList")
     item1.classList.add('item');
     item2.classList.add('item');
     item3.classList.add('item');
@@ -44,15 +49,19 @@ const makeMenu = () => {
     item4.innerHTML = 'Inbox'
     item5.innerHTML = 'Routines'
 
+
     defaultProjects.appendChild(item4);
     defaultProjects.appendChild(item1);
     defaultProjects.appendChild(item2);
     defaultProjects.appendChild(item3);
-    defaultProjects.appendChild(item5);
-    defaultProjects.appendChild(userProjects);
 
+    userProjects.appendChild(item5);
+    userProjects.appendChild(userProjectList);
+    userProjects.appendChild(makeaddrtnBtn());
 
     menu.appendChild(defaultProjects);
+    menu.appendChild(userProjects);
+
 
     return menu
 };
@@ -69,7 +78,7 @@ const makeFooter = () => {
     footer.innerHTML = 'Copyright © Patryk Borowski 2022'
 };
 
-const makePopup = () => {
+const makeTaskPopup = () => {
     const popUp = document.createElement('div');
     const titleText = document.createElement('span');
     const titleContent = document.createElement('input');
@@ -105,12 +114,49 @@ const makePopup = () => {
     doneBtn.addEventListener('click', () => {
         appendTask();
         updateTasks('tasksInbox')
-        closePopup();
+        closeTaskPopup();
     })
 
     closeBtn.addEventListener('click', () => {
-        closePopup();
+        closeTaskPopup();
     })
+
+    return popUp;
+};
+
+const makeRoutinePopUp = () => {
+    const popUp = document.createElement('div');
+    const titleText = document.createElement('span');
+    const titleContent = document.createElement('input');
+    const doneBtn = document.createElement('button')
+    const closeBtn = document.createElement('button');
+
+    titleContent.setAttribute('id','routineName');
+
+
+    titleText.innerHTML = 'Routine name';
+    doneBtn.innerHTML = 'Add a routine';
+    closeBtn.innerHTML = 'Close';
+
+    popUp.classList.add('popup');
+    popUp.setAttribute('id','routinespopup')
+
+    popUp.appendChild(titleText);
+    popUp.appendChild(titleContent);
+    popUp.appendChild(doneBtn);
+    popUp.appendChild(closeBtn);
+
+
+
+    doneBtn.addEventListener('click', ()=>{
+        appendRoutine();
+        updateRoutines();
+        closeRoutinePopup();
+    });
+
+    closeBtn.addEventListener('click', ()=>{
+        closeRoutinePopup();
+    });
 
     return popUp;
 };
@@ -119,18 +165,32 @@ const makeaddTaskBtn = () => {
     const addBtn = document.createElement('button');
     addBtn.innerHTML  = 'Add A Task';
 
-    addBtn.setAttribute('id','addBtn')
+    addBtn.setAttribute('id','addBtn');
 
     addBtn.addEventListener('click', ()=>{
-        openPopup();
-    })
+        openTaskPopup();
+    });
 
     return addBtn;
 };
 
+
+
+const makeaddrtnBtn = () => {
+    const routineBtn  = document.createElement('button');
+
+    routineBtn.innerHTML = "Add a routine";
+    
+    routineBtn.addEventListener('click', () => {
+        openRoutinePopup()
+    })
+
+    return routineBtn;
+}
+
 const makeTask = (_title,_date) => {
     const task = document.createElement('div');
-    const checkbox = document.createElement('input')
+    const checkbox = document.createElement('input');
     const title = document.createElement('span');
     const date = document.createElement('span');
     const deleteButton = document.createElement('button');
@@ -152,25 +212,58 @@ const makeTask = (_title,_date) => {
     return task;
 };
 
-const loadPopup = () => {
-    const content = document.querySelector('.content')
+const makeRoutine = (_title) => {
+    const routine  = document.createElement('div');
+    const title = document.createElement('button');
 
-    content.appendChild(makePopup());
+    title.setAttribute('id','routine');
+
+    title.innerHTML = _title;
+
+    routine.appendChild(title);
+
+    return routine;
+}
+
+const loadTaskPopup = () => {
+    const content = document.querySelector('.content');
+
+    content.appendChild(makeTaskPopup());
 };
 
-const openPopup = () => {
+const loadRoutinePopup = () => {
+    const content = document.querySelector('.content');
+
+    content.appendChild(makeRoutinePopUp());
+};
+
+const openTaskPopup = () => {
     const popup = document.querySelector(".popup");
     
     popup.classList.add('open-popup');
 
 };
 
-const closePopup = () => {
+const openRoutinePopup = () => {
+    const popup = document.querySelector("#routinespopup");
+    
+    popup.classList.add('open-popup');
+}
+
+const closeTaskPopup = () => {
     const popup = document.querySelector(".popup");
 
 
     popup.classList.remove("open-popup");
 };
+
+const closeRoutinePopup = () => {
+    const popup = document.querySelector("#routinespopup");
+
+
+    popup.classList.remove("open-popup");
+};
+
 
 const loadMain = () => {
     const content = document.querySelector(".content");
@@ -186,4 +279,4 @@ const loadMenu = () => {
 
 
 
-export {makeHeader,makeFooter, makeTask, loadMenu, loadMain, loadPopup, openPopup, makeaddTaskBtn as makeaddBtn};
+export {makeHeader,makeFooter, makeTask, loadMenu, loadMain, loadTaskPopup as loadPopup, openTaskPopup as openPopup, makeaddTaskBtn as makeaddBtn, loadRoutinePopup, makeRoutine};

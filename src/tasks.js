@@ -1,6 +1,5 @@
 import { isThisMonth, isThisWeek, isToday, parseISO } from "date-fns";
 import { downloadfromStorage, savetoStorage } from "./storage";
-
 import { makeTask } from "./UI";
 
 let todayTasks = [];
@@ -13,7 +12,6 @@ class Task {
         this.descritpion = descritpion;
         this.date = date;
     };
-
 
     set setTitle(title){
         this.title = title;
@@ -41,18 +39,6 @@ class Task {
         const year = this.date.split('-')[0];
         return `${year}-${month}-${day}`;
     };
-
-    get getDay() {
-        return this.date.split('-')[1];
-    }
-
-    get getMonth(){
-        return this.date.split('-')[2];
-    }
-
-    get getYear(){
-        return this.date.split('-')[0];
-    }
 };
 
 const adddefaultTask = () => {

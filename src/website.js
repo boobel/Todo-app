@@ -1,4 +1,4 @@
-import {makeHeader,makeFooter, loadMenu, loadMain, loadPopup} from "./UI";
+import {makeHeader,makeFooter, loadMenu, loadMain, loadPopup, loadRoutinePopup} from "./UI";
 import { loadToday } from "./today";
 import { loadWeek } from "./week";
 import { loadMonth } from "./month";
@@ -26,7 +26,6 @@ const buttonListeners = () => {
     monthButton.addEventListener('click',() => {
         loadMonth();
     })
-
 };
 
 
@@ -39,6 +38,7 @@ const runTodo = () => {
     loadMain();
     loadInbox();
     loadPopup();
+    loadRoutinePopup();
     buttonListeners();
     updateTasks('tasksInbox');
 };

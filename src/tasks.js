@@ -13,6 +13,8 @@ class Task {
         this.date = date;
     };
 
+
+
     set setTitle(title){
         this.title = title;
     };
@@ -40,6 +42,22 @@ class Task {
         return `${year}-${month}-${day}`;
     };
 };
+
+
+const deleteTask = () => {
+    const delBtns = document.getElementsByClassName('delTaskBtn')
+
+    for(let i = 0; i < delBtns.length; i++){
+        delBtns[i].addEventListener('click', ()=> {
+            if(document.querySelector('.tasksToday')){
+                todayTasks.splice(i,1)
+                savetoStorage('todayTasks',todayTasks);
+                updateTasks("tasksToday");
+            }
+        })
+    }
+};
+
 
 const adddefaultTask = () => {
     const titleC = document.querySelector('.titleContent');
@@ -109,8 +127,10 @@ const updateTasks = (when) => {
         let date = arr[i].date;
         const div = makeTask(title, date);
         place.appendChild(div);
+
     }
+    deleteTask();
 }
 
 
-export {appendTask, updateTasks, adddefaultTask, todayTasks};
+export {appendTask, updateTasks, adddefaultTask, deleteTask, todayTasks};

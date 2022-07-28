@@ -1,4 +1,4 @@
-import { adddefaultTask, appendTask, updateTasks } from "./tasks";
+import { appendTask, deleteTask, updateTasks } from "./tasks";
 
 
 
@@ -121,10 +121,6 @@ const makeaddTaskBtn = () => {
     return addBtn;
 };
 
-
-
-
-
 const makeTask = (_title,_date) => {
     const task = document.createElement('div');
     const checkbox = document.createElement('input');
@@ -136,6 +132,7 @@ const makeTask = (_title,_date) => {
     checkbox.setAttribute('type','checkbox');
     title.setAttribute('id', 'taskTitle');
     date.setAttribute('id', 'taskDate');
+    deleteButton.setAttribute('class','delTaskBtn')
 
     title.innerHTML =  _title;
     date.innerHTML = "Due Date: " + _date;
@@ -146,9 +143,11 @@ const makeTask = (_title,_date) => {
     task.appendChild(date);
     task.appendChild(deleteButton);
 
+
+    deleteTask();
+
     return task;
 };
-
 
 const loadTaskPopup = () => {
     const content = document.querySelector('.content');
@@ -162,7 +161,6 @@ const openTaskPopup = () => {
     popup.classList.add('open-popup');
 
 };
-
 
 const closeTaskPopup = () => {
     const popup = document.querySelector(".popup");
@@ -182,7 +180,5 @@ const loadMenu = () => {
 
     content.appendChild(makeMenu());
 };
-
-
 
 export {makeHeader,makeFooter, makeTask, loadMenu, loadMain, loadTaskPopup as loadPopup, openTaskPopup as openPopup, makeaddTaskBtn as makeaddBtn};

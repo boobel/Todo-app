@@ -1,4 +1,3 @@
-import { monthTasks, weekTasks, todayTasks } from "./tasks";
 
 const savetoStorage = (key,arr) =>{
     localStorage.setItem(key,JSON.stringify(arr))

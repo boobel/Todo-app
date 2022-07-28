@@ -2,27 +2,29 @@ import {makeHeader,makeFooter, loadMenu, loadMain, loadPopup} from "./UI";
 import { loadToday } from "./today";
 import { loadWeek } from "./week";
 import { loadMonth } from "./month";
+import {loadInbox} from "./inbox";
+import { updateTasks } from "./tasks";
 
-let current;
 
 const buttonListeners = () => {
     const todayButton = document.querySelector('#todayBtn');
     const weekButton = document.querySelector('#weekBtn');
     const monthButton = document.querySelector('#monthBtn');
+    const InboxButton = document.querySelector('#inboxBtn');
 
 
+    InboxButton.addEventListener('click', ()=> {
+        loadInbox();
+    })
 
     todayButton.addEventListener('click',() => {
         loadToday();
-        current = 'today';
     })
     weekButton.addEventListener('click',() => {
         loadWeek();
-        current = 'week';
     })
     monthButton.addEventListener('click',() => {
         loadMonth();
-        current = 'month';
     })
 
 };
@@ -30,13 +32,16 @@ const buttonListeners = () => {
 
 const runTodo = () => {
 
+
     makeHeader();
     makeFooter();
     loadMenu();
     loadMain();
+    loadInbox();
     loadPopup();
     buttonListeners();
+    updateTasks('tasksInbox');
 };
 
 
-export {runTodo, current};
+export {runTodo};

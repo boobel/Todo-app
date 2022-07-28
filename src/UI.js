@@ -1,6 +1,4 @@
-import { appendTask } from "./tasks";
-import { updateTasks} from "./tasks";
-import { current } from "./website";
+import { appendTask, updateTasks } from "./tasks";
 
 
 
@@ -15,29 +13,43 @@ const makeHeader = () => {
 const makeMenu = () => {
     const menu  = document.createElement('div');
     const defaultProjects = document.createElement('div');
+    const userProjects = document.createElement('div');
     const item1 = document.createElement('button');
     const item2 = document.createElement('button');
     const item3 = document.createElement('button');
+    const item4 = document.createElement('button');
+    const item5 = document.createElement('h1');
+
 
     menu.setAttribute('id','menu');
     item1.setAttribute('id','todayBtn');
     item2.setAttribute('id','weekBtn');
     item3.setAttribute('id','monthBtn');
-
+    item4.setAttribute('id','inboxBtn');
+    item5.setAttribute('id', 'routines');
 
     menu.classList.add('menu');
     defaultProjects.classList.add("deaultProjects");
     item1.classList.add('item');
     item2.classList.add('item');
     item3.classList.add('item');
+    item4.classList.add('item');
+    item5.classList.add('userProjectsTitle');
+
+
 
     item1.innerHTML = 'Today';
     item2.innerHTML = 'This Week';
     item3.innerHTML = 'This Month';
+    item4.innerHTML = 'Inbox'
+    item5.innerHTML = 'Routines'
 
+    defaultProjects.appendChild(item4);
     defaultProjects.appendChild(item1);
     defaultProjects.appendChild(item2);
     defaultProjects.appendChild(item3);
+    defaultProjects.appendChild(item5);
+    defaultProjects.appendChild(userProjects);
 
 
     menu.appendChild(defaultProjects);
@@ -73,6 +85,8 @@ const makePopup = () => {
     descritpionContent.classList.add("descriptionContent");
     dateContent.classList.add('dateContent');
 
+    dateContent.setAttribute('type','date');
+
     titleText.innerHTML = 'Title';
     descritpionText.innerHTML = 'Description';
     dateText.innerHTML = 'Due Date';
@@ -89,38 +103,19 @@ const makePopup = () => {
     popUp.appendChild(closeBtn);
 
     doneBtn.addEventListener('click', () => {
-        if(current==='today'){
-            appendTask('tasksToday');
-            updateTasks("tasksToday");
-        }
-        else if(current ==='week'){
-            appendTask('tasksWeek');
-            updateTasks("tasksWeek");
-        }
-        else if(current === 'month'){
-            appendTask('tasksMonth');
-            updateTasks("tasksMonth");
-        }
+        appendTask();
+        updateTasks('tasksInbox')
         closePopup();
     })
 
     closeBtn.addEventListener('click', () => {
-        if(current==='today'){
-            updateTasks("tasksToday");
-        }
-        else if(current ==='week'){
-            updateTasks("tasksWeek");
-        }
-        else if(current === 'month'){
-            updateTasks("tasksMonth");
-        }        
         closePopup();
     })
 
     return popUp;
 };
 
-const makeaddBtn = () => {
+const makeaddTaskBtn = () => {
     const addBtn = document.createElement('button');
     addBtn.innerHTML  = 'Add A Task';
 
@@ -135,18 +130,24 @@ const makeaddBtn = () => {
 
 const makeTask = (_title,_date) => {
     const task = document.createElement('div');
+    const checkbox = document.createElement('input')
     const title = document.createElement('span');
     const date = document.createElement('span');
-
+    const deleteButton = document.createElement('button');
+    
     task.setAttribute('id', 'taskMain');
+    checkbox.setAttribute('type','checkbox');
     title.setAttribute('id', 'taskTitle');
     date.setAttribute('id', 'taskDate');
 
     title.innerHTML =  _title;
     date.innerHTML = "Due Date: " + _date;
+    deleteButton.innerHTML = "Delete";
 
+    task.appendChild(checkbox);
     task.appendChild(title);
     task.appendChild(date);
+    task.appendChild(deleteButton);
 
     return task;
 };
@@ -185,4 +186,4 @@ const loadMenu = () => {
 
 
 
-export {makeHeader,makeFooter, makeTask, loadMenu, loadMain, loadPopup, openPopup, makeaddBtn};
+export {makeHeader,makeFooter, makeTask, loadMenu, loadMain, loadPopup, openPopup, makeaddTaskBtn as makeaddBtn};

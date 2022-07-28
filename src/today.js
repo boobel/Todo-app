@@ -1,4 +1,3 @@
-import { makeaddBtn } from "./UI";
 import { updateTasks} from "./tasks";
 
 
@@ -40,9 +39,8 @@ const loadToday = () => {
     main.innerHTML='';
 
 
-    main.appendChild(makeTitle('today'));
+    main.appendChild(makeTitle('Today'));
     main.appendChild(makeToday());
-    main.append(makeaddBtn());
     updateTasks("tasksToday");
 
 };

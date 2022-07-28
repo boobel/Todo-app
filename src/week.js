@@ -1,5 +1,4 @@
-import { makeaddBtn } from "./UI";
-import { appendTask, updateTasks } from "./tasks";
+import { updateTasks } from "./tasks";
 import { makeTitle } from "./today";
 
 const makeWeek = () => {
@@ -16,9 +15,8 @@ const loadWeek = () => {
     const main =document.querySelector('.main')
     main.innerHTML='';
 
-    main.appendChild(makeTitle('this week'));
+    main.appendChild(makeTitle('This week'));
     main.appendChild(makeWeek());
-    main.appendChild(makeaddBtn());
     updateTasks('tasksWeek')
 
 };

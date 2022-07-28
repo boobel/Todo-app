@@ -1,4 +1,3 @@
-import { makeaddBtn } from "./UI";
 import { makeTitle } from "./today";
 import { appendTask, updateTasks } from "./tasks";
 
@@ -21,9 +20,8 @@ const loadMonth = () => {
     const main =document.querySelector('.main')
     main.innerHTML='';
 
-    main.appendChild(makeTitle('this month'));
+    main.appendChild(makeTitle('This month'));
     main.appendChild(makeMonth());
-    main.appendChild(makeaddBtn());
     updateTasks('tasksMonth')
 };
 

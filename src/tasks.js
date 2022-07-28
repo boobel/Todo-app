@@ -54,7 +54,10 @@ const adddefaultTask = () => {
 };
 
 const appendTask = () => {
-    if(isToday(parseISO(adddefaultTask().getDate))){
+    if(document.querySelector("#userRoutine")) {
+        
+    }
+    else if(isToday(parseISO(adddefaultTask().getDate))){
         console.log('today')
         todayTasks.push(adddefaultTask());
         savetoStorage('todayTasks',todayTasks);
@@ -94,11 +97,11 @@ const updateTasks = (when) => {
     }
 
     if (localStorage.getItem('weekTasks')){
-        weekTasks = downloadfromStorage('weekTasks')
+        weekTasks = downloadfromStorage('weekTasks');
     }
 
     if (localStorage.getItem('monthTasks')){
-        monthTasks = downloadfromStorage('monthTasks')
+        monthTasks = downloadfromStorage('monthTasks');
     }
 
     for (let i = 0; i < arr.length; i++) {
@@ -110,4 +113,4 @@ const updateTasks = (when) => {
 }
 
 
-export {appendTask, updateTasks,todayTasks};
+export {appendTask, updateTasks, adddefaultTask, todayTasks};

@@ -20,13 +20,12 @@ const makeToday = () => {
 
 const makeTitle = (titleC) => {
     const title = document.createElement('h1');
-    const line = document.createElement("hr");
 
-    line.setAttribute("width", "100%");
+    title.setAttribute('id', 'titleH');
 
     title.innerHTML=titleC;
+    
 
-    title.append(line)
 
     return title;
 };

@@ -65,8 +65,7 @@ const makeTaskPopup = () => {
     const popUp = document.createElement('div');
     const titleText = document.createElement('span');
     const titleContent = document.createElement('input');
-    const descritpionText = document.createElement('span');
-    const descritpionContent = document.createElement('input');
+
     const dateText = document.createElement('span');
     const dateContent = document.createElement('input');
     const doneBtn = document.createElement('button');
@@ -74,21 +73,17 @@ const makeTaskPopup = () => {
 
     popUp.classList.add('popup');
     titleContent.classList.add('titleContent');
-    descritpionContent.classList.add("descriptionContent");
     dateContent.classList.add('dateContent');
 
     dateContent.setAttribute('type','date');
 
     titleText.innerHTML = 'Title';
-    descritpionText.innerHTML = 'Description';
     dateText.innerHTML = 'Due Date';
     doneBtn.innerHTML = 'Add Task';
     closeBtn.innerHTML = 'Close';
 
     popUp.appendChild(titleText);
     popUp.appendChild(titleContent);
-    popUp.appendChild(descritpionText);
-    popUp.appendChild(descritpionContent);
     popUp.appendChild(dateText);
     popUp.appendChild(dateContent);
     popUp.appendChild(doneBtn);

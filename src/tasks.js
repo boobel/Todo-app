@@ -49,7 +49,7 @@ const finishTask = () => {
  for(let i = 0; i < checkboxes.length; i++) {
     checkboxes[i].addEventListener('change',()=>{
         if(document.querySelector('.tasksToday')){
-            todayTasks.splice(i,1)
+            todayTasks.splice(i,1);
             savetoStorage('todayTasks',todayTasks);
             updateTasks("tasksToday");
         }
@@ -63,11 +63,12 @@ const finishTask = () => {
             savetoStorage('monthTasks',monthTasks);
             updateTasks("tasksMonth");
         }
+        else if(document.querySelector('.tasksInbox')){
+            alert('You cannot delete from here');
+        }
     })
  }
 }
-
-
 
 
 
@@ -119,7 +120,7 @@ const updateTasks = (when) => {
         arr = monthTasks;
     }
     else if (when==='tasksInbox'){
-        arr = todayTasks.concat(weekTasks,monthTasks);
+        arr = todayTasks.concat(weekTasks, monthTasks);
     }
  
     if (localStorage.getItem('todayTasks')) {
@@ -133,6 +134,7 @@ const updateTasks = (when) => {
     if (localStorage.getItem('monthTasks')){
         monthTasks = downloadfromStorage('monthTasks');
     }
+
 
     for (let i = 0; i < arr.length; i++) {
         let title = arr[i].title;

@@ -28,6 +28,10 @@ body  {
     padding-bottom: 3vh;
 }
 
+
+button {
+    background: none;
+}
 /*---------------------------------------------------------------------------LEFT SIDE MENU---------------------------------------------------------------------------*/
 .menu {
     display: flex;
@@ -119,9 +123,29 @@ body  {
 /*----------------------------------------------------------------TASKS---------------------------------------------------------------------------------------------*/
 #taskMain {
     display: flex;
-    justify-content: space-between;
+    justify-content:flex-start;
+    color: grey;
+    padding: 1%;
 }
 
+#taskMain {
+    margin: 1%;
+}
+
+#taskMain:hover {
+    background-color: rgb(206, 202, 202);
+    border-radius: 10px;
+}
+
+#taskTitle {
+    margin-right: 15%;
+    margin-left: 1%;
+    width: 50%;
+}
+
+#taskDate {
+    justify-content: flex-end;
+}
 
 /*----------------------------------------------------------------FOOTER---------------------------------------------------------------------------------------------*/
 

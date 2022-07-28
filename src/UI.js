@@ -126,25 +126,20 @@ const makeTask = (_title,_date) => {
     const checkbox = document.createElement('input');
     const title = document.createElement('span');
     const date = document.createElement('span');
-    const deleteButton = document.createElement('button');
-    
+
+    checkbox.classList.add('checkbx');
+
     task.setAttribute('id', 'taskMain');
     checkbox.setAttribute('type','checkbox');
     title.setAttribute('id', 'taskTitle');
     date.setAttribute('id', 'taskDate');
-    deleteButton.setAttribute('class','delTaskBtn')
 
     title.innerHTML =  _title;
     date.innerHTML = "Due Date: " + _date;
-    deleteButton.innerHTML = "Delete";
 
     task.appendChild(checkbox);
     task.appendChild(title);
     task.appendChild(date);
-    task.appendChild(deleteButton);
-
-
-    deleteTask();
 
     return task;
 };

@@ -43,20 +43,32 @@ class Task {
     };
 };
 
+const finishTask = () => {
+ const checkboxes = document.getElementsByClassName('checkbx')
+ 
+ for(let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener('change',()=>{
+        if(document.querySelector('.tasksToday')){
+            todayTasks.splice(i,1)
+            savetoStorage('todayTasks',todayTasks);
+            updateTasks("tasksToday");
+        }
+        else if(document.querySelector('.tasksWeek')) {
+            weekTasks.splice(i,1)
+            savetoStorage('weekTasks',weekTasks);
+            updateTasks("tasksWeek");
+        }
+        else if(document.querySelector('.tasksMonth')) {
+            monthTasks.splice(i,1)
+            savetoStorage('monthTasks',monthTasks);
+            updateTasks("tasksMonth");
+        }
+    })
+ }
+}
 
-const deleteTask = () => {
-    const delBtns = document.getElementsByClassName('delTaskBtn')
 
-    for(let i = 0; i < delBtns.length; i++){
-        delBtns[i].addEventListener('click', ()=> {
-            if(document.querySelector('.tasksToday')){
-                todayTasks.splice(i,1)
-                savetoStorage('todayTasks',todayTasks);
-                updateTasks("tasksToday");
-            }
-        })
-    }
-};
+
 
 
 const adddefaultTask = () => {
@@ -129,8 +141,8 @@ const updateTasks = (when) => {
         place.appendChild(div);
 
     }
-    deleteTask();
+    finishTask();
 }
 
 
-export {appendTask, updateTasks, adddefaultTask, deleteTask, todayTasks};
+export {appendTask, updateTasks, adddefaultTask, todayTasks};
